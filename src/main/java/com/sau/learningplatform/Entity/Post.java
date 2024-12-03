@@ -23,7 +23,7 @@ public class Post {
 
     @OneToOne
     @JoinColumn(name = "parent_post_id")
-    private Post post;
+    private Post parentPost;
 
     @Column(name = "text")
     private String text;
@@ -61,12 +61,12 @@ public class Post {
         this.project = project;
     }
 
-    public Post getPost() {
-        return post;
+    public Post getParentPost() {
+        return parentPost;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setParentPost(Post parentPost) {
+        this.parentPost = parentPost;
     }
 
     public String getText() {
