@@ -1,9 +1,9 @@
 package com.sau.learningplatform.Repository;
 
-import com.sau.learningplatform.Entity.User;
+import com.sau.learningplatform.Entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface CourseRepository extends JpaRepository<Course,Integer> {
 }
