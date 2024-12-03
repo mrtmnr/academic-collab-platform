@@ -2,11 +2,13 @@ package com.sau.learningplatform.Service;
 
 import com.sau.learningplatform.Entity.Course;
 import com.sau.learningplatform.Entity.User;
+import com.sau.learningplatform.EntityResponse.CourseResponse;
 import com.sau.learningplatform.Repository.CourseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -19,13 +21,26 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<Course> getCoursesByUser(User user) {
+    public List<CourseResponse> getCoursesByUser(User user) {
 
         List<Course>courses=courseRepository.findCoursesByUsers(user);
 
         if (courses.isEmpty()){
             log.error("no courses found for: {} !",user.getName());
         }
-        return courseRepository.findCoursesByUsers(user);
+        return courses.stream().map(this::courseToResponse).toList();
+    }
+
+
+    private CourseResponse courseToResponse(Course course){
+
+       return CourseResponse.builder().
+                id(course.getId()).
+                code(course.getCode()).
+                users(course.getUsers()).
+                title(course.getTitle()).
+                projects(course.getProjects()).
+                build();
+
     }
 }

@@ -1,23 +1,25 @@
 package com.sau.learningplatform.EntityResponse;
 
+import com.sau.learningplatform.Entity.Project;
 import com.sau.learningplatform.Entity.User;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class CourseResponse {
 
     private int id;
 
     private List<User> users;
 
-
+    private List<Project> projects;
     private String title;
 
 
     private String code;
 
 
-    private Boolean isDeleted;
 }

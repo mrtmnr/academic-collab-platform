@@ -2,6 +2,7 @@ package com.sau.learningplatform.Controller;
 
 import com.sau.learningplatform.Entity.Course;
 import com.sau.learningplatform.Entity.User;
+import com.sau.learningplatform.EntityResponse.CourseResponse;
 import com.sau.learningplatform.Service.CourseService;
 import com.sau.learningplatform.Service.UserService;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class HomeController {
     public String homepage(Model model){
 
         User user=userService.findById(1);
-        List<Course>courses=courseService.getCoursesByUser(user);
+        List<CourseResponse>courses=courseService.getCoursesByUser(user);
 
         model.addAttribute("courses",courses);
 
