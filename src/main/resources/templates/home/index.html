@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses and Projects</title>
+</head>
+<body>
+<header>
+    <h1>Welcome to the Dashboard</h1>
+</header>
+
+<main>
+    <h2>Your Courses</h2>
+    <div th:if="${#lists.isEmpty(courses)}">
+        <p>You are not enrolled in any courses yet.</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(courses)}">
+        <ul>
+
+            <li th:each="course : ${courses}">
+                <h3 th:text="${course.title}">Course Title</h3>
+                <p th:text="'Code: ' + ${course.code}">Course Code</p>
+
+                <h4>Projects:</h4>
+                <div th:if="${#lists.isEmpty(course.projects)}">
+                    <p>No projects available for this course.</p>
+                </div>
+                <ul th:unless="${#lists.isEmpty(course.projects)}">
+
+                    <li th:each="project : ${course.projects}">
+                        <strong th:text="${project.title}">Project Title</strong>
+                        <p th:text="${project.description}">Project Description</p>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</main>
+
+<footer>
+    <p>© 2024 Your Platform. All rights reserved.</p>
+</footer>
+</body>
+</html>
