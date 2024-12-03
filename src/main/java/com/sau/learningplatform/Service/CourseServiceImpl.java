@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 @Slf4j
@@ -26,7 +24,7 @@ public class CourseServiceImpl implements CourseService{
         List<Course>courses=courseRepository.findCoursesByUsers(user);
 
         if (courses.isEmpty()){
-            log.error("no courses found for: {} !",user.getName());
+            log.warn("no courses found for: {} !",user.getName());
         }
         return courses.stream().map(this::courseToResponse).toList();
     }
