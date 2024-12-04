@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Projects</h1>
+  <div class="row">
+    <div th:if="${#lists.isEmpty(projects)}" class="alert alert-info">
+      No projects available for this course.
+    </div>
+    <div th:each="project : ${projects}" class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${project.title}">Project Title</h5>
+          <p class="card-text" th:text="${project.description}">Project Description</p>
+          <p class="card-text"><small class="text-muted" th:text="'Start Date: ' + ${project.dateCreated}">Start Date</small></p>
+          <p class="card-text"><small class="text-muted" th:text="'End Date: ' + ${project.dateEnd}">End Date</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/home" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+</body>
+</html>

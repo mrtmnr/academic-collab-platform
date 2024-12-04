@@ -1,7 +1,6 @@
 package com.sau.learningplatform.Controller;
 
 import com.sau.learningplatform.Entity.Post;
-import com.sau.learningplatform.Entity.Project;
 import com.sau.learningplatform.Service.PostService;
 import com.sau.learningplatform.Service.ProjectService;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,9 @@ import java.util.List;
 public class PostController {
     private PostService postService;
 
-    private ProjectService projectService;
-
-    public PostController(PostService postService, ProjectService projectService) {
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.projectService = projectService;
+
     }
 
     @GetMapping("/posts")
