@@ -2,7 +2,9 @@ package com.sau.learningplatform.EntityResponse;
 
 import com.sau.learningplatform.Entity.Course;
 import lombok.Data;
-import java.util.Set;
+
+import java.util.List;
+
 
 @Data
 public class UserResponse {
@@ -12,7 +14,7 @@ public class UserResponse {
 
     private String password;
 
-    private Set<Course> courses;
+    private List<Course> courses;
 
     private String number;
 

@@ -13,10 +13,9 @@ public class CourseResponse {
 
     private int id;
 
-    private List<User> users;
+    private String owner;
 
     private String title;
-
 
     private String code;
 

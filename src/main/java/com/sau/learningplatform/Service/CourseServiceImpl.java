@@ -35,7 +35,7 @@ public class CourseServiceImpl implements CourseService{
        return CourseResponse.builder().
                 id(course.getId()).
                 code(course.getCode()).
-                users(course.getUsers()).
+                owner(course.getOwner()).
                 title(course.getTitle()).
                 build();
 
