@@ -21,16 +21,6 @@
                 <h3 th:text="${course.title}">Course Title</h3>
                 <p th:text="'Code: ' + ${course.code}">Course Code</p>
 
-                <h4>Projects:</h4>
-                <div th:if="${#lists.isEmpty(course.projects)}">
-                    <p>No projects available for this course.</p>
-                </div>
-                <ul th:unless="${#lists.isEmpty(course.projects)}">
-
-                    <li th:each="project : ${course.projects}">
-                        <strong th:text="${project.title}">Project Title</strong>
-                        <p th:text="${project.description}">Project Description</p>
-
                     </li>
                 </ul>
             </li>

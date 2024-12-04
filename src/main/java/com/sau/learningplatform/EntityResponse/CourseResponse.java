@@ -15,7 +15,6 @@ public class CourseResponse {
 
     private List<User> users;
 
-    private List<Project> projects;
     private String title;
 
 

@@ -37,7 +37,6 @@ public class CourseServiceImpl implements CourseService{
                 code(course.getCode()).
                 users(course.getUsers()).
                 title(course.getTitle()).
-                projects(course.getProjects()).
                 build();
 
     }

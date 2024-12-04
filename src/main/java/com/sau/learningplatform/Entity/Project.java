@@ -3,7 +3,9 @@ package com.sau.learningplatform.Entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -13,8 +15,13 @@ public class Project {
     @Column(name = "id")
     private int id;
 
+    @JoinColumn(name = "course_id")
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+    private Course course;
+
     @Column(name = "title")
     private String title;
+
 
     @Column(name = "date_created")
     @CreationTimestamp
@@ -37,6 +44,13 @@ public class Project {
         this.id = id;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public String getTitle() {
         return title;

@@ -26,7 +26,7 @@ public class HomeController {
     @GetMapping("/")
     public String homepage(Model model){
         //mock user
-        User user=userService.findById(1);
+        User user=userService.findById(2);
         List<CourseResponse>courses=courseService.getCoursesByUser(user);
 
         model.addAttribute("courses",courses);

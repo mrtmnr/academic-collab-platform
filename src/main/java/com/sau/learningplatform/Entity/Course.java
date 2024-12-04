@@ -20,13 +20,11 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();
 
-    @JoinColumn(name = "course_id")
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Project> projects=new ArrayList<>();
-
     @Column(name = "title")
     private String title;
 
+    @Column(name = "owner")
+    private String owner;
     @Column(name = "code")
     private String code;
 
@@ -49,12 +47,12 @@ public class Course {
         this.users = users;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getTitle() {

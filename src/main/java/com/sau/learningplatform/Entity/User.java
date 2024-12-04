@@ -23,7 +23,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> courses = new HashSet<>();
 
-
     @Column(name = "number")
     private String number;
 
