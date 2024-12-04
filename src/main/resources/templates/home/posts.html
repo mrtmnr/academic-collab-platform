@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Posts</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Opsiyonel CSS -->
+</head>
+<body>
+<header>
+    <h1>Posts for the Project</h1>
+    <a href="/">Back to Homepage</a>
+</header>
+
+<main>
+    <h2>Posts</h2>
+    <div th:if="${#lists.isEmpty(posts)}">
+        <p>No posts available for this project.</p>
+    </div>
+    <ul th:unless="${#lists.isEmpty(posts)}">
+        <!-- Postları Listele -->
+        <li th:each="post : ${posts}">
+            <article>
+                <h3 th:text="${post.user.username} + ' wrote:'">Username</h3>
+                <p th:text="${post.text}">Post content</p>
+                <p th:text="'Status: ' + ${post.status}">Post Status</p>
+                <p th:text="'Created on: ' + ${#dates.format(post.dateCreated, 'yyyy-MM-dd HH:mm')}">
+                    Post Date
+                </p>
+            </article>
+            <hr>
+        </li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2024 Your Platform. All rights reserved.</p>
+</footer>
+</body>
+</html>

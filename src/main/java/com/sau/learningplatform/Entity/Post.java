@@ -32,8 +32,6 @@ public class Post {
     @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
-    @Column(name = "is_solved")
-    private Boolean isSolved;
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
@@ -91,14 +89,6 @@ public class Post {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
-    }
-
-    public Boolean getSolved() {
-        return isSolved;
-    }
-
-    public void setSolved(Boolean solved) {
-        isSolved = solved;
     }
 
     public Boolean getDeleted() {

@@ -23,6 +23,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> courses = new HashSet<>();
 
+
     @Column(name = "number")
     private String number;
 
@@ -31,6 +32,9 @@ public class User {
 
     @Column(name = "surname")
     private String surname;
+
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -79,6 +83,14 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

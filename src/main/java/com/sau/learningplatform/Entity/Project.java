@@ -1,6 +1,9 @@
 package com.sau.learningplatform.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "projects")
@@ -12,6 +15,13 @@ public class Project {
 
     @Column(name = "title")
     private String title;
+
+    @Column(name = "date_created")
+    @CreationTimestamp
+    private Date dateCreated;
+
+    @Column(name = "date_end")
+    private Date dateEnd;
 
     @Column(name = "description")
     private String description;
@@ -42,6 +52,22 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public Boolean getDeleted() {
