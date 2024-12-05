@@ -1,6 +1,7 @@
 package com.sau.learningplatform.Service;
 
 import com.sau.learningplatform.Entity.Post;
+import com.sau.learningplatform.EntityResponse.PostResponse;
 import com.sau.learningplatform.Repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,21 @@ public class PostServiceImpl implements PostService{
 
 
     @Override
-    public List<Post> getPostsByProjectId(int id) {
+    public List<PostResponse> getPostResponsesByProjectId(int id) {
         List<Post>posts=postRepository.findByProjectId(id);
         if (posts.isEmpty()){
             log.info("No posts found for the given project!");
         }
-        return posts;
+        return posts.stream().map(this::postToResponse).toList();
     }
+
+    private PostResponse postToResponse(Post post){
+
+        return PostResponse.builder().
+                text(post.getText()).
+                username(post.getUser().getUsername()).
+                dateCreated(post.getDateCreated()).
+                build();
+    }
+
 }

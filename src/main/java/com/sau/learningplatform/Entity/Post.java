@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -21,9 +22,9 @@ public class Post {
     @JoinColumn(name = "project_id",nullable = false)
     private Project project;
 
-    @OneToOne
-    @JoinColumn(name = "parent_post_id")
-    private Post parentPost;
+    @OneToMany
+    @JoinColumn(name = "child_post_id")
+    private List<Post> childPost;
 
     @Column(name = "text")
     private String text;
@@ -59,12 +60,12 @@ public class Post {
         this.project = project;
     }
 
-    public Post getParentPost() {
-        return parentPost;
+    public List<Post> getChildPost() {
+        return childPost;
     }
 
-    public void setParentPost(Post parentPost) {
-        this.parentPost = parentPost;
+    public void setChildPost(List<Post> childPost) {
+        this.childPost = childPost;
     }
 
     public String getText() {

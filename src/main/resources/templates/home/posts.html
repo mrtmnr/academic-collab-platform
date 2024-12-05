@@ -20,9 +20,8 @@
         <!-- Postları Listele -->
         <li th:each="post : ${posts}">
             <article>
-                <h3 th:text="${post.user.username} + ' wrote:'">Username</h3>
+                <h3 th:text="${post.username} + ' wrote:'">Username</h3>
                 <p th:text="${post.text}">Post content</p>
-                <p th:text="'Status: ' + ${post.status}">Post Status</p>
                 <p th:text="'Created on: ' + ${#dates.format(post.dateCreated, 'yyyy-MM-dd HH:mm')}">
                     Post Date
                 </p>
