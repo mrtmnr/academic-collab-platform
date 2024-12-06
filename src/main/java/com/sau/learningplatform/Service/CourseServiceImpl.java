@@ -29,6 +29,28 @@ public class CourseServiceImpl implements CourseService{
         return courses.stream().map(this::courseToResponse).toList();
     }
 
+    @Override
+    public void save(Course course) {
+        courseRepository.save(course);
+    }
+
+    @Override
+    public Course getCourseByCode(String courseCode) {
+        List<Course>courses=courseRepository.findByCode(courseCode);
+
+        if (courses.size()>1){
+            log.error("Multiple courses with same code exists!");
+        }
+
+        if (courses.isEmpty()){
+            log.error("there is no course with given code !");
+        }
+
+        return courses.get(0);
+
+
+    }
+
 
     private CourseResponse courseToResponse(Course course){
 

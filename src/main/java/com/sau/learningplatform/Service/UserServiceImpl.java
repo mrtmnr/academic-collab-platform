@@ -5,6 +5,7 @@ import com.sau.learningplatform.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,4 +27,11 @@ public class UserServiceImpl implements UserService{
 
         return result.get();
     }
+
+    @Override
+    public void saveAll(List<User> users) {
+        userRepository.saveAll(users);
+    }
+
+
 }

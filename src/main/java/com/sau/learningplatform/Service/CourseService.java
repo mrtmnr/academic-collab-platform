@@ -9,4 +9,8 @@ import java.util.List;
 public interface CourseService {
 
     List<CourseResponse> getCoursesByUser(User user);
+
+    void save(Course course);
+
+    Course getCourseByCode(String courseCode);
 }

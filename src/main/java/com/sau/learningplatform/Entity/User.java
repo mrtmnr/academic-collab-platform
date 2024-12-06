@@ -17,7 +17,7 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH})
     @JoinTable(name="course_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
@@ -43,6 +43,18 @@ public class User {
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
+
+    public User(String number, String name, String surname, String username, String password, String role) {
+        this.number = number;
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -115,4 +127,10 @@ public class User {
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
+
+    public void addCourse(Course course){
+        courses.add(course);
+
+    }
+
 }
