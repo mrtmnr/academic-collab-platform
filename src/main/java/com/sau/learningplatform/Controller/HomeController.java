@@ -39,7 +39,6 @@ public class HomeController {
         //mock user
         User user=userService.findById(2);
         List<CourseResponse>courses=courseService.getCoursesByUser(user);
-
         model.addAttribute("courses",courses);
 
         return "home/index";
@@ -62,8 +61,8 @@ public class HomeController {
 
         courseService.save(course);
 
-       // model.addAttribute("course",course);
-        
+       //model.addAttribute("course",course);
+
         return course;   // Redirect to the add-course page with success message
     }
 
@@ -79,9 +78,7 @@ public class HomeController {
                     String surname = row.getCell(1).getStringCellValue();
                     String number = row.getCell(2).getStringCellValue();
 
-                    String password = (name.toLowerCase() + "." + surname.toLowerCase()).replaceAll("\\s", "");
-
-                    User student = new User(number,name,surname,name+"."+surname,password,"student");
+                    User student = new User(number,name,surname,number,"student");
                     students.add(student);
                 }
             }

@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 @Builder
 public class PostResponse {
-    private String username;
+    private String nameAndSurname;
 
     private String text;
 

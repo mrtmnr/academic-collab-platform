@@ -32,9 +32,6 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "password")
     private String password;
 
@@ -44,11 +41,10 @@ public class User {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    public User(String number, String name, String surname, String username, String password, String role) {
+    public User(String number, String name, String surname, String password, String role) {
         this.number = number;
         this.name = name;
         this.surname = surname;
-        this.username = username;
         this.password = password;
         this.role = role;
     }
@@ -94,14 +90,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

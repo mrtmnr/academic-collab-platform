@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService{
 
         return PostResponse.builder().
                 text(post.getText()).
-                username(post.getUser().getUsername()).
+                nameAndSurname(post.getUser().getName()+" "+post.getUser().getSurname()).
                 dateCreated(post.getDateCreated()).
                 build();
     }
