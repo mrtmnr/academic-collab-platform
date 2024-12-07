@@ -29,6 +29,20 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User findByNumber(String number) {
+
+        Optional<User>result=userRepository.findByNumber(number);
+
+        if (result.isEmpty()){
+            throw new RuntimeException("User not found with given number !");
+        }
+
+        return result.get();
+
+    }
+
+
+    @Override
     public void saveAll(List<User> users) {
         userRepository.saveAll(users);
     }

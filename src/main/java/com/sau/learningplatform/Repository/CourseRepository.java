@@ -13,4 +13,6 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
 
     List<Course> findByCode(String code);
 
+    boolean existsByCode(String code);
+
 }

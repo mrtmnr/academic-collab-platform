@@ -4,18 +4,28 @@ import com.sau.learningplatform.Entity.Course;
 import com.sau.learningplatform.Entity.User;
 import com.sau.learningplatform.EntityResponse.CourseResponse;
 import com.sau.learningplatform.Repository.CourseRepository;
+import com.sau.learningplatform.Repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
 public class CourseServiceImpl implements CourseService{
     private CourseRepository courseRepository;
+    private UserRepository userRepository;
 
-    public CourseServiceImpl(CourseRepository courseRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, UserRepository userRepository) {
         this.courseRepository = courseRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -43,12 +53,62 @@ public class CourseServiceImpl implements CourseService{
         }
 
         if (courses.isEmpty()){
-            log.error("there is no course with given code !");
+            throw new RuntimeException("there is no course with given code !");
         }
 
         return courses.get(0);
 
+    }
 
+    @Override
+    public void addCourseWithStudentsByExcel(String courseName, String courseCode, MultipartFile studentFile) throws IOException {
+
+        if (courseRepository.existsByCode(courseCode)){
+            throw new RuntimeException("The course with given code is already exists!");
+        }
+
+        // Parse the uploaded Excel file
+        List<User> students = saveStudentsByFile(studentFile);
+
+        // get a course, save and associate students with it
+        Course course=new Course(courseName,"owner",courseCode);
+
+        students.forEach(course::addUser);
+
+        courseRepository.save(course);
+    }
+
+    private List<User> saveStudentsByFile(MultipartFile file) throws IOException {
+        List<User> students = new ArrayList<>();
+
+        try (Workbook workbook = new XSSFWorkbook(file.getInputStream())) {
+            Sheet sheet = workbook.getSheetAt(0);  // Get the first sheet
+            for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {  // Skip header row
+                Row row = sheet.getRow(rowIndex);
+                if (row != null) {
+                    String name = row.getCell(0).getStringCellValue();
+                    String surname = row.getCell(1).getStringCellValue();
+                    String number = row.getCell(2).getStringCellValue();
+
+                    User student;
+                    //if user already exists just get it
+                    if(userRepository.existsByNumber(number)){
+                        student=userRepository.findByNumber(number).get();
+                    }
+                    //if it's not exists create new user
+                    else {
+                        student = new User(number,name,surname,number,"student");
+                    }
+                    students.add(student);
+                }
+            }
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        log.info("course has been saved!");
+
+        return students;
     }
 
 
