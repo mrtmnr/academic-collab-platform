@@ -21,11 +21,11 @@ import java.util.List;
 @Slf4j
 public class CourseServiceImpl implements CourseService{
     private CourseRepository courseRepository;
-    private UserRepository userRepository;
+    private UserService userService;
 
-    public CourseServiceImpl(CourseRepository courseRepository, UserRepository userRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, UserService userService) {
         this.courseRepository = courseRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -92,12 +92,13 @@ public class CourseServiceImpl implements CourseService{
 
                     User student;
                     //if user already exists just get it
-                    if(userRepository.existsByNumber(number)){
-                        student=userRepository.findByNumber(number).get();
+                    if(userService.existsByNumber(number)){
+                        student=userService.findByNumber(number);
                     }
                     //if it's not exists create new user
                     else {
                         student = new User(number,name,surname,number,"student");
+                        userService.register(student);
                     }
                     students.add(student);
                 }
