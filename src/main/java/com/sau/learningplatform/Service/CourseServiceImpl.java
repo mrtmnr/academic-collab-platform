@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public void addCourseWithStudentsByExcel(String courseName, String courseCode, MultipartFile studentFile) throws IOException {
+    public void addCourseWithStudentsByExcel(String ownerNumber, String courseName, String courseCode, MultipartFile studentFile) throws IOException {
 
         if (courseRepository.existsByCode(courseCode)){
             throw new RuntimeException("The course with given code is already exists!");
@@ -70,8 +71,11 @@ public class CourseServiceImpl implements CourseService{
         // Parse the uploaded Excel file
         List<User> students = saveStudentsByFile(studentFile);
 
+        User owner=userService.findByNumber(ownerNumber);
+        String ownerName=owner.getName()+" ".concat(owner.getSurname());
+
         // get a course, save and associate students with it
-        Course course=new Course(courseName,"owner",courseCode);
+        Course course=new Course(courseName,ownerName,courseCode);
 
         students.forEach(course::addUser);
 

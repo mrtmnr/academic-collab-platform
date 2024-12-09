@@ -7,6 +7,7 @@ import com.sau.learningplatform.Service.CourseService;
 import com.sau.learningplatform.Service.UserService;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@Controller
 public class HomeController {
 
     private CourseService courseService;
@@ -31,22 +33,23 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String homepage(Model model){
-        //mock user
-        User user=userService.findById(2);
+    public String homepage(Principal principal, Model model){
+        String number=principal.getName();
+        User user=userService.findByNumber(number);
+
         List<CourseResponse>courses=courseService.getCoursesByUser(user);
         model.addAttribute("courses",courses);
 
         return "home/index";
     }
     @PostMapping("/add/course")
-    public void addCourse(
+    public void addCourse(Principal principal,
             @RequestParam("courseName") String courseName,
             @RequestParam("courseCode") String courseCode,
             @RequestParam("file") MultipartFile studentFile,
             Model model) throws IOException {
 
-         courseService.addCourseWithStudentsByExcel(courseName,courseCode,studentFile);
+         courseService.addCourseWithStudentsByExcel(principal.getName(),courseName,courseCode,studentFile);
 
     }
 
