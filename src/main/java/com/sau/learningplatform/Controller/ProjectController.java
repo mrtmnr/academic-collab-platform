@@ -1,6 +1,6 @@
 package com.sau.learningplatform.Controller;
 
-import com.sau.learningplatform.Entity.Project;
+import com.sau.learningplatform.EntityResponse.ProjectResponse;
 import com.sau.learningplatform.Service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +20,8 @@ public class ProjectController {
     @GetMapping("/projects")
     public String ProjectsByCourses(Model model){
         //mock course id
-        int courseId=1;
-        List<Project>projects=projectService.getProjectsByCourseId(courseId);
+        int courseId=2;
+        List<ProjectResponse>projects=projectService.getProjectsByCourseId(courseId);
         model.addAttribute("projects",projects);
         return "home/projects";
     }

@@ -3,6 +3,7 @@ package com.sau.learningplatform.Entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Post {
     private String status;
     @Column(name = "date_created")
     @CreationTimestamp
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
@@ -84,11 +85,11 @@ public class Post {
         this.status = status;
     }
 
-    public Date getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 

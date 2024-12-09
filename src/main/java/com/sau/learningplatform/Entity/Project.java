@@ -3,6 +3,7 @@ package com.sau.learningplatform.Entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +26,10 @@ public class Project {
 
     @Column(name = "date_created")
     @CreationTimestamp
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
 
     @Column(name = "date_end")
-    private Date dateEnd;
+    private LocalDateTime dateEnd;
 
     @Column(name = "description")
     private String description;
@@ -68,19 +69,19 @@ public class Project {
         this.description = description;
     }
 
-    public Date getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateEnd() {
+    public LocalDateTime getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(LocalDateTime dateEnd) {
         this.dateEnd = dateEnd;
     }
 

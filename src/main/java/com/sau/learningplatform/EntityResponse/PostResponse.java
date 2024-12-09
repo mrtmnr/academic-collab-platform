@@ -3,6 +3,7 @@ package com.sau.learningplatform.EntityResponse;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -12,6 +13,6 @@ public class PostResponse {
 
     private String text;
 
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
 
 }

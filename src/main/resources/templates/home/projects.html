@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Projects</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
-  <h1 class="text-center mb-4">Projects</h1>
-  <div class="row">
-    <div th:if="${#lists.isEmpty(projects)}" class="alert alert-info">
-      No projects available for this course.
-    </div>
-    <div th:each="project : ${projects}" class="col-md-4">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title" th:text="${project.title}">Project Title</h5>
-          <p class="card-text" th:text="${project.description}">Project Description</p>
-          <p class="card-text"><small class="text-muted" th:text="'Start Date: ' + ${project.dateCreated}">Start Date</small></p>
-          <p class="card-text"><small class="text-muted" th:text="'End Date: ' + ${project.dateEnd}">End Date</small></p>
-        </div>
-      </div>
-    </div>
+  <h1 class="text-center">Projects</h1>
+
+  <!-- Eğer proje listesi boşsa bir mesaj göster -->
+  <div th:if="${#lists.isEmpty(projects)}" class="alert alert-warning text-center">
+    No projects found for this course.
   </div>
-  <a href="/home" class="btn btn-primary mt-3">Back to Home</a>
+
+  <!-- Projeler listeleniyor -->
+  <div th:if="${!#lists.isEmpty(projects)}">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Is Valid</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Projects listesindeki her bir projeyi iter -->
+      <tr th:each="project : ${projects}">
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.description}"></td>
+        <td>
+          <!-- isValid alanına göre True/False gösterimi -->
+          <span th:if="${project.isValid}" class="text-success">Valid</span>
+          <span th:if="${!project.isValid}" class="text-danger">Invalid</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
