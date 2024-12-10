@@ -4,7 +4,6 @@ import com.sau.learningplatform.Entity.Course;
 import com.sau.learningplatform.Entity.User;
 import com.sau.learningplatform.EntityResponse.CourseResponse;
 import com.sau.learningplatform.Repository.CourseRepository;
-import com.sau.learningplatform.Repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +80,11 @@ public class CourseServiceImpl implements CourseService{
         courseRepository.save(course);
     }
 
+    @Override
+    public void deleteById(int id) {
+        courseRepository.deleteById(id);
+    }
+
     private List<User> saveStudentsByFile(MultipartFile file) throws IOException {
         List<User> students = new ArrayList<>();
 
@@ -115,6 +118,9 @@ public class CourseServiceImpl implements CourseService{
 
         return students;
     }
+
+
+
 
 
     private CourseResponse courseToResponse(Course course){

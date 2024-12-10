@@ -9,4 +9,6 @@ public interface ProjectService {
     Project findById(int id);
 
     List<ProjectResponse> getProjectsByCourseId(int courseId);
+
+    void deleteById(int id);
 }

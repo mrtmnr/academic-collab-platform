@@ -22,7 +22,7 @@
             <article>
                 <h3 th:text="${post.nameAndSurname} + ' wrote:'">user</h3>
                 <p th:text="${post.text}">Post content</p>
-                <p th:text="'Created on: ' + ${#dates.format(post.dateCreated, 'yyyy-MM-dd HH:mm')}">
+                <p th:text="'Created on: ' +${post.getDateCreated()}">
                     Post Date
                 </p>
             </article>

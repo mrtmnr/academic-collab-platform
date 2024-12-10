@@ -6,7 +6,6 @@ import com.sau.learningplatform.EntityResponse.CourseResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 public interface CourseService {
@@ -18,4 +17,6 @@ public interface CourseService {
     Course getCourseByCode(String courseCode);
 
     void addCourseWithStudentsByExcel(String ownerNumber, String courseName, String courseCode, MultipartFile studentFile) throws IOException;
+
+    void deleteById(int id);
 }

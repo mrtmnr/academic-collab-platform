@@ -5,10 +5,7 @@ import com.sau.learningplatform.EntityResponse.ProjectResponse;
 import com.sau.learningplatform.Repository.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +40,12 @@ public class ProjectServiceImpl implements ProjectService{
         return projects.stream().map(this::mapToResponse).toList();
 
     }
+
+    @Override
+    public void deleteById(int id) {
+        projectRepository.deleteById(id);
+    }
+
 
     ProjectResponse mapToResponse(Project project){
 

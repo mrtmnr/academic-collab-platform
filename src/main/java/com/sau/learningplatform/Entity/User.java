@@ -1,15 +1,16 @@
 package com.sau.learningplatform.Entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.Name;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET is_deleted=true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class User {
 
     @Id
@@ -39,7 +40,7 @@ public class User {
     private String role;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted=Boolean.FALSE;
 
     public User(String number, String name, String surname, String password, String role) {
         this.number = number;
